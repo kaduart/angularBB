@@ -72,6 +72,7 @@
 
     table {
         /* display: flex; */
+        width: 100%;
     }
 
     table tr {
@@ -112,27 +113,24 @@
                     <div class="list-group">
                         <div class="row">
                             <div class="col-md-offset-2 col-md-8">
-                                <div class="usuario-conteudo">
+                                <div class="investimento-conteudo">
 
-                                    <div ng-controller="investimentoController">
-                                        <button type="button" ng-click="listaInvestimento()">Atualizar
-                                            Investimentos</button>
+                                    <div ng-controller="investimentoCtrl">
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>Nome</th>
                                                     <th>Objetivo</th>
-                                                    <th>Saldo Total Disponível</th>
+                                                    <th class="sdTotal">Saldo Total Disponível</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat="investimento in investimentos">
+                                                <tr ng-repeat="investimento in lstInvestimentos">
                                                     <td>{{investimento.nome}}</td>
                                                     <td>{{investimento.objetivo}}</td>
                                                     <td>{{investimento.saldoTotalDisponivel}}</td>
                                                     <td>
-                                                        <a class="btn" ng-click="resgatarInvestimento(investimento)"
-                                                            href="#!/view2">
+                                                        <a class="btn" ng-click="resgatarAcao(id)" href="#!/view2">
                                                             Resgatar</a>
                                                     </td>
                                                 </tr>

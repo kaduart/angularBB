@@ -21,6 +21,16 @@
     resize: vertical;
   }
 
+  .textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    background-color: #fff;
+  }
+
+
   label {
     padding: 12px 12px 12px 0;
     display: inline-block;
@@ -58,6 +68,11 @@
     margin-top: 6px;
   }
 
+  table {
+    /* display: flex; */
+    width: 100%;
+  }
+
   /* Clear floats after the columns */
   .row:after {
     content: "";
@@ -65,7 +80,17 @@
     clear: both;
   }
 
+  .modal-content {
+    margin: auto;
+    padding: 7px 55px;
+    width: 85%;
+  }
 
+  .modal-footer {
+    padding: 15px;
+    text-align: center;
+    border-top: 1px solid #e5e5e5;
+  }
 
   /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
   @media screen and (max-width: 600px) {
@@ -80,20 +105,28 @@
 </style>
 
 <div class="container">
-  <form ng-controller="investimentoController">
+  <form ng-controller="investimentoCtrl">
     <div class="row">
       <div class="col-25">
         <label for="fname"><strong>Dados do investimento</strong></label>
       </div>
       <div class="col-75">
-        <div>
-          <table>
-            <tr>
-              <td>{{acoes.nome}}</td>
-              <td>{{acoes.objetivo}}</td>
-              <td>{{acoes.saldoTotalDisponivel}}</td>
-            </tr>
-          </table>
+        <div class="textarea" id="subject" name="subject" placeholder="Write something" style="height:50px">
+          <div class="list-group">
+            <div class="row">
+              <div class="col-md-offset-2 col-md-8">
+                <div class="resgatar-conteudo1">
+                  <table>
+                    <tr>
+                      <td>{{acoes.nome}}</td>
+                      <td>{{acoes.objetivo}}</td>
+                      <td>{{acoes.saldoTotalDisponivel}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -102,25 +135,58 @@
         <label for="subject"><strong>Restage do seu jeito</strong></label>
       </div>
       <div class="col-75">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Ação</th>
-              <th>Saldo Acumulado</th>
-              <th>Valor a Resgatar</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="acao in acoes.acoes">
-              <td>{{acao.nome}}</td>
-              <td>{{acao.percentual}}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="textarea" id="subject" name="subject" placeholder="Write something" style="height:200px">
+          <div class="list-group">
+            <div class="row">
+              <div class="col-md-offset-2 col-md-8">
+                <div class="resgatar-conteudo2">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Ação</th>
+                        <th>Saldo Acumulado</th>
+                        <th>Valor a Resgatar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="acao in acoes.acoes">
+                        <td>{{acao.nome}}</td>
+                        <td>{{acao.percentual}}</td>
+                        <td>
+                          <input type="text">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <input type="submit" value="Confirmar resgate">
+</div>
+<div class="row">
+  <input type="submit" data-target="#ConfirmarResgate" value="Confirmar resgate" data-toggle="modal">
+</div>
+</form>
+
+<div class="modal" id="ConfirmarResgate" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">RESGATE EFETUADO COM SUCESSO!</h4>
+      </div>
+      <div class="modal-body">
+        <p>O valor solicitado estará em sua conta em até 5 dias.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Novo Resgate</button>
+      </div>
     </div>
-  </form>
+
+  </div>
+</div>
 </div>
