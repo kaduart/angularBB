@@ -1,0 +1,149 @@
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    html {
+        padding: 50px 25px;
+    }
+
+    .textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+        background-color: #fff;
+    }
+
+    label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+    }
+
+    input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+    .container {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+
+    .col-25 {
+        float: left;
+        width: 100%;
+        margin-top: 6px;
+    }
+
+    .col-75 {
+        float: left;
+        width: 100%;
+        margin-top: 6px;
+    }
+
+    .col-75 hr {
+        margin: auto;
+    }
+
+    .col-75 h1 {
+        margin: auto;
+    }
+
+    .btnAtualizar {
+        display: flex;
+        align-self: flex-end;
+    }
+
+    table {
+        /* display: flex; */
+    }
+
+    table tr {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    thead {
+        width: 100%;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    @media screen and (max-width: 600px) {
+
+        .col-25,
+        .col-75,
+        input[type=submit] {
+            width: 100%;
+            margin-top: 0;
+        }
+    }
+</style>
+
+<div class="container">
+    <form>
+        <div class="row">
+            <div class="col-25">
+                <h2>Investimentos</h2>
+            </div>
+            <div class="col-75">
+                <div class="textarea" id="subject" name="subject" placeholder="Write something.." style="height:200px">
+                    <div class="list-group">
+                        <div class="row">
+                            <div class="col-md-offset-2 col-md-8">
+                                <div class="usuario-conteudo">
+
+                                    <div ng-controller="investimentoController">
+                                        <button type="button" ng-click="listaInvestimento()">Atualizar
+                                            Investimentos</button>
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nome</th>
+                                                    <th>Objetivo</th>
+                                                    <th>Saldo Total Disponível</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="investimento in investimentos">
+                                                    <td>{{investimento.nome}}</td>
+                                                    <td>{{investimento.objetivo}}</td>
+                                                    <td>{{investimento.saldoTotalDisponivel}}</td>
+                                                    <td>
+                                                        <a class="btn" ng-click="resgatarInvestimento(investimento)"
+                                                            href="#!/view2">
+                                                            Resgatar</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </form>
+</div>
