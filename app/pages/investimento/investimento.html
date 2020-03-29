@@ -43,18 +43,30 @@
         border-radius: 5px;
         background-color: #f2f2f2;
         padding: 20px;
+        width: 92%;
     }
 
     .col-25 {
         float: left;
         width: 100%;
-        margin-top: 6px;
+        padding: 20px 35px;
+    }
+
+    .col-25 hr {
+        margin-top: 0;
+        border: 0;
+        border-top: 3px solid #eee;
+    }
+
+    .col-25 span {
+        font-size: 45px;
+        font-family: sans-serif;
+        font-weight: bold;
     }
 
     .col-75 {
         float: left;
         width: 100%;
-        margin-top: 6px;
     }
 
     .col-75 hr {
@@ -91,6 +103,50 @@
         clear: both;
     }
 
+    .sdTotal {
+        margin-right: 22%;
+        margin-left: 5%;
+    }
+
+    h2 {
+        margin: auto;
+        padding: 5px 7px;
+    }
+
+    strong {
+        font-size: 135%
+    }
+
+    .table th {
+        font-size: x-large;
+    }
+
+    .table td {
+        font-size: large;
+        padding: 8px 8px;
+    }
+
+    .table tbody tr td {
+        line-height: 1.42857143;
+        vertical-align: top;
+        border-top: 1px solid #fcf8e3;
+    }
+
+    .investimento-conteudo {
+        padding: 31px;
+        margin-top: -4%;
+    }
+
+    @media (min-width: 992px) {
+        .col-md-offset-2 {
+            margin-left: 0%;
+            /* display: flex; */
+            width: 100%;
+        }
+    }
+
+    @media screen and(min-width: 419px) {}
+
     @media screen and (max-width: 600px) {
 
         .col-25,
@@ -106,10 +162,12 @@
     <form>
         <div class="row">
             <div class="col-25">
-                <h2>Investimentos</h2>
+                <span>Investimentos</span>
+                <hr>
             </div>
             <div class="col-75">
-                <div class="textarea" id="subject" name="subject" placeholder="Write something" style="height:200px">
+                <div class="listInvestimento" id="subject" name="subject" placeholder="Write something"
+                    style="height:auto">
                     <div class="list-group">
                         <div class="row">
                             <div class="col-md-offset-2 col-md-8">
@@ -118,10 +176,10 @@
                                     <div ng-controller="investimentoCtrl">
                                         <table class="table table-striped">
                                             <thead>
-                                                <tr>
+                                                <tr class="sdTotal">
                                                     <th>Nome</th>
                                                     <th>Objetivo</th>
-                                                    <th class="sdTotal">Saldo Total Disponível</th>
+                                                    <th>Saldo Total Disponível</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -129,8 +187,18 @@
                                                     <td>{{investimento.nome}}</td>
                                                     <td>{{investimento.objetivo}}</td>
                                                     <td>{{investimento.saldoTotalDisponivel}}</td>
-                                                    <td>
-                                                        <a class="btn" ng-click="resgatarAcao(id)" href="#!/view2">
+                                                    <td ng-if="investimento.indicadorCarencia === 'S'">
+
+                                                        <a class="btn btn-success" ng-disabled='true'
+                                                            ng-click="atualizarInvestimentoPorId(investimento)"
+                                                            href="#!/resgatar-investimento">
+                                                            Resgatar</a>
+                                                    </td>
+                                                    <td ng-if="investimento.indicadorCarencia === 'N'">
+
+                                                        <a class="btn btn-success"
+                                                            ng-click="atualizarInvestimentoPorId(investimento)"
+                                                            href="#!/resgatar-investimento">
                                                             Resgatar</a>
                                                     </td>
                                                 </tr>

@@ -1,0 +1,268 @@
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    html {
+        padding: 50px 25px;
+    }
+
+    input[type=text],
+    select,
+    textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+    }
+
+    .textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+        background-color: #fff;
+    }
+
+
+    label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+        width: 23%;
+        height: auto;
+        font-size: 25px;
+        margin-top: 25px;
+    }
+
+    input[type=button]:hover {
+        background-color: #45a049;
+    }
+
+    .container {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        width: 92%;
+    }
+
+    .col-25 {
+        float: left;
+        width: 100%;
+        margin-top: 6px;
+    }
+
+    .col-75 {
+        float: left;
+        width: 100%;
+        margin-top: 6px;
+        background-color: #fff;
+    }
+
+    table {
+        /* display: flex; */
+        width: 100%;
+        margin-bottom: 0px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .row {
+        padding: 0px 20px;
+    }
+
+    .modal-content {
+        margin: auto;
+        padding: 7px 55px;
+        width: 85%;
+    }
+
+    .modal-footer {
+        padding: 15px;
+        text-align: center;
+        border-top: 1px solid #e5e5e5;
+    }
+
+    .listaAcoes {
+        height: auto !important;
+    }
+
+    .list-group {
+        padding-left: 0;
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+
+    .table tbody tr td {
+        vertical-align: inherit;
+        border-top: 1px solid #d1c7c7
+    }
+
+    .table tbody tr td input {
+        width: 74%;
+    }
+
+    input {
+        margin-top: 24px !important;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+        width: 23%;
+        font-size: 23px;
+    }
+
+    strong {
+        font-size: 135%
+    }
+
+
+    .table th {
+        font-size: x-large;
+    }
+
+    .table td {
+        font-size: large;
+    }
+
+    .resgatar-conteudo1 {
+        font-size: large;
+    }
+
+    label {
+        font-size: 17px;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #2e6da4;
+        font-size: 20px;
+    }
+
+    @media screen and (max-width: 600px) {
+
+        .col-25,
+        .col-75,
+        input[type=submit] {
+            width: 100%;
+            margin-top: 0;
+        }
+    }
+
+
+    @media (min-width: 992px) {
+        .col-md-offset-2 {
+            margin-left: 0%;
+            /* display: flex; */
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="container">
+    <div id="resgateFormulario" ng-controller="resgateCtrl">
+        <div class="col-25">
+            <label for="fname"><strong>Dados do investimento</strong></label>
+        </div>
+        <div class="col-75">
+            <div class="listarInv" id="subject" name="subject" placeholder="Write something">
+                <div class="list-group">
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-8">
+                            <div class="resgatar-conteudo1">
+                                <table>
+                                    <tr>
+                                        <td>{{investimento.nome}}</td>
+                                        <td>{{investimento.objetivo}}</td>
+                                        <td>{{investimento.saldoTotalDisponivel}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-25">
+            <label for="subject"><strong>Resgate do seu jeito</strong></label>
+        </div>
+
+        <div class="col-75">
+            <div class="listaAcoes" id="subject" name="subject" style="height:200px">
+                <div class="list-group">
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-8">
+                            <div class="resgatar-conteudo2">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Ação</th>
+                                            <th>Saldo Acumulado</th>
+                                            <th>Valor a Resgatar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="acao in investimento.acoes">
+                                            <td>{{acao.nome}}</td>
+                                            <td>{{acao.percentual}}</td>
+                                            <td>
+                                                <input type="text" ng-model="acao.valorAResgatar"
+                                                    ng-change="pegarInput(acao)">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-success" ng-click="atualizarInvestimento()"
+                data-target="#ConfirmarResgate" data-toggle="modal">Confirmar
+                resgate</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="ConfirmarResgate" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Resgate efetuado com sucesso!!</h4>
+            </div>
+            <div class="modal-body">
+                <p>O valor solicitado estará em sua conta em até 5 dias.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-primary" data-dismiss="modal">Novo
+                    Resgate</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>

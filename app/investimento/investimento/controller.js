@@ -3,24 +3,24 @@
 
     angular
         .module('myApp')
-        .controller('investimentoCtrl', function ($scope, investimentoService) {
 
-            $scope.lstInvestimentos = [];
+        .controller('investimentoCtrl', function ($scope, investimentoService, investimentosFactory) {
+
             carregarInvestimentos();
 
             function carregarInvestimentos() {
                 var listaInvestimento = investimentoService.getTodosInvestimento();
 
                 listaInvestimento.then(function (resp) {
-                    $scope.lstInvestimentos = resp.data.response.data.listaInvestimentos;
-                    console.log('testeeee', $scope.lstInvestimentos);
-                },
-                    function () {
-                        console.log("Os dados nao foram listados!");
-                    }
-                );
+                    $scope.lstInvestimentos = resp.data;
+                });
             }
 
+            $scope.atualizarInvestimentoPorId = function (acao) {
+                //set obj entre controlles
+                $scope.investimento = acao;
+                investimentosFactory.set($scope.investimento);
+            }
 
-        })
+        });
 })();
