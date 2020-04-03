@@ -4,20 +4,20 @@
       "id": "1",
       "nome": "INVESTIMENTO I",
       "objetivo": "Minha aposentadoria",
-      "saldoTotalDisponivel": 71.36,
+      "saldoTotalDisponivel": "19.84",
       "indicadorCarencia": "N",
       "acoes": [
         {
           "id": "1",
           "nome": "BBAS3",
           "percentual": 10,
-          "valorAResgatar": 0
+          "valorAResgatar": ""
         },
         {
           "id": "2",
           "nome": "VALE3",
           "percentual": 20.71,
-          "valorAResgatar": 0
+          "valorAResgatar": ""
         },
         {
           "id": "3",
@@ -40,13 +40,14 @@
       "id": "2",
       "nome": "INVESTIMENTO II",
       "objetivo": "Viajem dos sonhos",
-      "saldoTotalDisponivel": "656.43",
+      "saldoTotalDisponivel": "161.07",
       "indicadorCarencia": "N",
       "acoes": [
         {
           "id": "1",
           "nome": "BBAS3",
-          "percentual": 35.81
+          "percentual": 35.81,
+          "valorAResgatar": ""
         },
         {
           "id": "2",
@@ -64,18 +65,20 @@
       "id": "3",
       "nome": "INVESTIMENTO III",
       "objetivo": "Abrir meu próprio negócio",
-      "saldoTotalDisponivel": 26000,
+      "saldoTotalDisponivel": "6994.54",
       "indicadorCarencia": "N",
       "acoes": [
         {
           "id": "1",
           "nome": "BBAS3",
-          "percentual": 41.1
+          "percentual": 41.1,
+          "valorAResgatar": ""
         },
         {
           "id": "2",
           "nome": "VALE3",
-          "percentual": 22.43
+          "percentual": 22.43,
+          "valorAResgatar": ""
         },
         {
           "id": "3",

@@ -42,7 +42,6 @@
         border-radius: 4px;
         cursor: pointer;
         float: right;
-        width: 23%;
         height: auto;
         font-size: 25px;
         margin-top: 25px;
@@ -239,30 +238,29 @@
             </div>
         </div>
         <div class="row">
-            <button type="button" class="btn btn-success" ng-click="atualizarInvestimento()"
-                data-target="#ConfirmarResgate" data-toggle="modal">Confirmar
+            <button type="button" class="btn btn-success" data-target="#ConfirmarResgate" data-toggle="modal">Confirmar
                 resgate</button>
         </div>
-    </div>
-</div>
 
-<div class="modal" id="ConfirmarResgate" role="dialog">
-    <div class="modal-dialog">
+        <div class="modal" id="ConfirmarResgate" role="dialog">
+            <div class="modal-dialog">
 
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Resgate efetuado com sucesso!!</h4>
-            </div>
-            <div class="modal-body">
-                <p>O valor solicitado estará em sua conta em até 5 dias.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-primary" data-dismiss="modal">Novo
-                    Resgate</button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Resgate efetuado com sucesso!!</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>O valor solicitado estará em sua conta em até 5 dias.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-primary" data-dismiss="modal"
+                            ng-click="atualizarInvestimento()">Novo
+                            Resgate</button>
+                    </div>
+                </div>
+
             </div>
         </div>
-
     </div>
-</div>
 </div>

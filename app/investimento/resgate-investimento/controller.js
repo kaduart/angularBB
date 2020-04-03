@@ -29,28 +29,31 @@
                         var percentual = acao.percentual;
                         var desconto = 0;
 
-                        if (saldoTotalDisponivel >= valorIpt) {
+                        if (valorIpt > 0 && valorIpt < saldoTotalDisponivel) {
+                            desconto = saldoTotalDisponivel * percentual / 100;
 
-                            desconto = parseFloat(saldoTotalDisponivel * percentual / 100).toFixed(2);
-
-                            saldoTotalDisponivel = saldoTotalDisponivel - desconto;
+                            saldoTotalDisponivel -= desconto;
+                        } else if (valorIpt > saldoTotalDisponivel) {
+                            alert('Valor digitado é superior ao seu saldo');
+                        } else if (valorIpt == 0) {
+                            alert('Você precisa digitar um valor a ser resgatado.')
                         }
+                        saldoTotalDisponivel -= valorIpt;
 
                         $scope.atualizadoIdAcao = acao.id;
                         $scope.atualizadoAcaoNome = acao.nome;
                         $scope.atualizadoAtualizadoPercentual = acao.percentual;
-                        $scope.atualizadoValorAResgatar = saldoTotalDisponivel;
+                        $scope.atualizadoValorAResgatar = parseFloat(saldoTotalDisponivel).toFixed(2);
                     }
 
-                })
+                });
 
             }
 
-
             $scope.atualizarInvestimento = function () {
 
-                atualizarInvestimentoPorId();
                 var novoInvestimento = { ...$scope.investimento }
+
                 novoInvestimento.saldoTotalDisponivel = $scope.atualizadoValorAResgatar;
 
                 var acoes = [...$scope.investimento.acoes]
@@ -58,7 +61,7 @@
 
                     if (acao.id === $scope.atualizadoIdAcao) {
                         acao.percentual = $scope.atualizadoAtualizadoPercentual;
-                        acao.valorAResgatar = 0;
+                        acao.valorAResgatar = '';
                     }
                 })
 
@@ -66,10 +69,8 @@
                 var atualizarInfos = acaoService.atualizar(novoInvestimento);
                 atualizarInfos.then(function (data) {
                     if (data.success === true) {
-
-                        $timeout(atualizarInvestimentoPorId, 5000);
-                        limparDadosAtualizados();
-
+                        console.log("Acão resgatada resgatada");
+                        atualizarInvestimentoPorId();
                     } else {
                         console.log("Acão não resgatada");
                     }
@@ -77,9 +78,6 @@
                 }).catch(error => (console.log(error)));
             }
 
-            function limparDadosAtualizados() {
-                $scope.atualizadoValorAResgatar = "";
-            }
         });
 
 })();
